@@ -1,7 +1,8 @@
 from argparse import ArgumentParser, Namespace
+from sys import stdout
 
 
-if __name__ == "__main__":
+def main() -> None:
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
         dest="when",
@@ -14,5 +15,8 @@ if __name__ == "__main__":
         help="Message for reminder",
     )
     args: Namespace = parser.parse_args()
-    print(args)
-    print(args.when, type(args.when))
+    stdout.write(args.when)
+
+
+if __name__ == "__main__":
+    main()
