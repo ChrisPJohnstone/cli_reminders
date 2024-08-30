@@ -11,12 +11,14 @@ def main() -> None:
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
         dest="when",
+        metavar="when",
         type=str,
         choices=VALID_INCREMENTS,
         help="Message for reminder",
     )
     parser.add_argument(
         dest="message",
+        metavar="message",
         nargs="*",
         type=str,
         help="Message for reminder",
