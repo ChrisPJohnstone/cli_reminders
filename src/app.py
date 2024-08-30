@@ -14,14 +14,14 @@ def main() -> None:
         metavar="when",
         type=str,
         choices=VALID_INCREMENTS,
-        help="Message for reminder",
+        help="When reminder should be sent",
     )
     parser.add_argument(
         dest="message",
         metavar="message",
         nargs="*",
         type=str,
-        help="Message for reminder",
+        help="Message reminder should display",
     )
     args: Namespace = parser.parse_args()
     print(args)
