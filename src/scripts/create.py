@@ -27,15 +27,12 @@ def create() -> None:
     parser.add_argument(
         dest="message",
         metavar="message",
-        nargs="*",
+        nargs="+",
         type=str,
         help="Message reminder should display",
     )
-    # TODO: Make required (min 1)
     args: Namespace = parser.parse_args()
     config: Config = Config(**vars(args))
-    notification_client: NotificationClient = NotificationClient()
-    notification_client.send_notification(config.message)
 
 
 if __name__ == "__main__":
