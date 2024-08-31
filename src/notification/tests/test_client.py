@@ -1,7 +1,7 @@
 from unittest.mock import _Call, call, MagicMock, patch, PropertyMock
 import pytest
 
-from src.notification import Client
+from notification import Client
 
 
 init_args: list[str] = [

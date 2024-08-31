@@ -2,7 +2,7 @@ from datetime import date, time
 from unittest.mock import _Call, call, MagicMock, patch, PropertyMock
 import pytest
 
-from src.helpers import Config
+from helpers import Config
 
 
 init_args: list[str] = [

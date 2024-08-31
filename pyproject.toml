@@ -16,7 +16,7 @@ dependencies = [
   email = "chrispjohnstone97@gmail.com"
 
   [project.scripts]
-  reminder = "src.scripts:main"
+  reminder = "src.scripts:create"
   # TODO: Fix script address
 
 [tool.setuptools.packages.find]

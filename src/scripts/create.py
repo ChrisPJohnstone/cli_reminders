@@ -1,10 +1,10 @@
 from argparse import ArgumentParser, Namespace
 
-from .helpers import Config
-from .notification import Client as NotificationClient
+from src.helpers import Config
+from src.notification import Client as NotificationClient
 
 
-def main() -> None:
+def create() -> None:
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
         "-d",
@@ -31,6 +31,7 @@ def main() -> None:
         type=str,
         help="Message reminder should display",
     )
+    # TODO: Make required (min 1)
     args: Namespace = parser.parse_args()
     config: Config = Config(**vars(args))
     notification_client: NotificationClient = NotificationClient()
@@ -38,4 +39,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    create()
