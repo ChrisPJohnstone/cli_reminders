@@ -32,6 +32,7 @@ class Config:
             return
         # TODO: Find a cleaner solution than return
         raise NotImplementedError(f"Reminder date {value} is not supported")
+        # TODO: Add tests for error
 
     @property
     def reminder_time(self) -> str:
@@ -45,3 +46,4 @@ class Config:
             return
         # TODO: Find a cleaner solution than return
         raise NotImplementedError(f"Reminder time {value} is not supported")
+        # TODO: Add tests for error
