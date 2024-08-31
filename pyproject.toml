@@ -4,6 +4,9 @@ version = "1.0"
 description = "Tool for creating & managing reminders through CLI"
 readme = "README.md"
 requires-python = ">=3.11.9"
+dependencies = [
+  "notify-py",
+]
 
   [[project.authors]]
   name = "Christopher Johnstone"
