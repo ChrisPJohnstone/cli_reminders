@@ -21,6 +21,19 @@ def test_reminder_date(value: str, expected: str) -> None:
     assert config.reminder_date == expected
 
 
+reminder_date_error_tests: list[tuple[str | None, str]] = [
+    ("test", "Reminder date test is not supported"),
+]
+
+
+@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@pytest.mark.parametrize(["value", "expected"], reminder_date_error_tests)
+def test_reminder_date_error(value: str, expected: str) -> None:
+    config: Config = Config("", "", [""])
+    with pytest.raises(NotImplementedError, match=expected):
+        config.reminder_date = value
+
+
 reminder_time_tests: list[tuple[str, str]] = [
     ("09", time(9)),
     ("15", time(15)),
