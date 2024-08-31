@@ -2,7 +2,7 @@ from datetime import date, time
 from unittest.mock import _Call, call, MagicMock, patch, PropertyMock
 import pytest
 
-from helpers import Config
+from schedule import Client
 
 
 init_args: list[str] = [
@@ -35,9 +35,9 @@ init_tests: list[
 ]
 
 
-@patch.object(Config, "message", new_callable=PropertyMock)
-@patch.object(Config, "reminder_time", new_callable=PropertyMock)
-@patch.object(Config, "reminder_date", new_callable=PropertyMock)
+@patch.object(Client, "message", new_callable=PropertyMock)
+@patch.object(Client, "reminder_time", new_callable=PropertyMock)
+@patch.object(Client, "reminder_date", new_callable=PropertyMock)
 @pytest.mark.parametrize(init_args, init_tests)
 def test_init(
     mock_reminder_date: PropertyMock,
@@ -50,7 +50,7 @@ def test_init(
     expected_reminder_time_calls: list[_Call],
     expected_message_calls: list[_Call],
 ) -> None:
-    Config(reminder_date, reminder_time, message)
+    Client(reminder_date, reminder_time, message)
     mock_reminder_date.assert_has_calls(expected_reminder_date_calls)
     mock_reminder_time.assert_has_calls(expected_reminder_time_calls)
     mock_message.assert_has_calls(expected_message_calls)
@@ -64,12 +64,12 @@ reminder_date_tests: list[tuple[str | None, date]] = [
 ]
 
 
-@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], reminder_date_tests)
 def test_reminder_date(value: str, expected: str) -> None:
-    config: Config = Config("", "", [""])
-    config.reminder_date = value
-    assert config.reminder_date == expected
+    client: Client = Client("", "", [""])
+    client.reminder_date = value
+    assert client.reminder_date == expected
 
 
 reminder_date_error_tests: list[tuple[str | None, str]] = [
@@ -77,12 +77,12 @@ reminder_date_error_tests: list[tuple[str | None, str]] = [
 ]
 
 
-@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], reminder_date_error_tests)
 def test_reminder_date_error(value: str, expected: str) -> None:
-    config: Config = Config("", "", [""])
+    client: Client = Client("", "", [""])
     with pytest.raises(NotImplementedError, match=expected):
-        config.reminder_date = value
+        client.reminder_date = value
 
 
 reminder_time_tests: list[tuple[str | None, time]] = [
@@ -105,12 +105,12 @@ reminder_time_tests: list[tuple[str | None, time]] = [
 ]
 
 
-@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], reminder_time_tests)
 def test_reminder_time(value: str | None, expected: str) -> None:
-    config: Config = Config("", "", [""])
-    config.reminder_time = value
-    assert config.reminder_time == expected
+    client: Client = Client("", "", [""])
+    client.reminder_time = value
+    assert client.reminder_time == expected
 
 
 reminder_time_error_tests: list[tuple[str, str]] = [
@@ -118,12 +118,12 @@ reminder_time_error_tests: list[tuple[str, str]] = [
 ]
 
 
-@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], reminder_time_error_tests)
 def test_reminder_time_error(value: str, expected: str) -> None:
-    config: Config = Config("", "", [""])
+    client: Client = Client("", "", [""])
     with pytest.raises(NotImplementedError, match=expected):
-        config.reminder_time = value
+        client.reminder_time = value
 
 
 message_tests: list[tuple[list[str], str]] = [
@@ -132,9 +132,9 @@ message_tests: list[tuple[list[str], str]] = [
 ]
 
 
-@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], message_tests)
 def test_message(value: list[str], expected: str) -> None:
-    config: Config = Config("", "", [""])
-    config.message = value
-    assert config.message == expected
+    client: Client = Client("", "", [""])
+    client.message = value
+    assert client.message == expected

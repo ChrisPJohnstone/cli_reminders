@@ -2,7 +2,7 @@ from datetime import date, datetime, time
 from re import fullmatch
 
 
-class Config:
+class Client:
     def __init__(
         self,
         reminder_date: str | None,
