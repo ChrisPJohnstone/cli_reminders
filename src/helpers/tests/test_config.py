@@ -2,7 +2,7 @@ from datetime import date, time
 from unittest.mock import MagicMock, patch
 import pytest
 
-from helpers import Config
+from src.helpers import Config
 
 
 reminder_date_tests: list[tuple[str | None, date]] = [

@@ -16,13 +16,12 @@ dependencies = [
   email = "chrispjohnstone97@gmail.com"
 
   [project.scripts]
-  remind = "app:main"
+  remind = "scripts:main"
   # TODO: Fix script address
 
 [tool.setuptools.packages.find]
-where = ["src"]
 include = ["*"]
-exclude = ["*tests"]
+exclude = ["*tests*"]
 namespaces = true
 
 [tool.black]
