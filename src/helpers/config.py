@@ -46,7 +46,7 @@ class Config:
         elif fullmatch(r"\d{2}(:?\d{2}){0,2}", value):
             cleaned: str = f"{value.replace(':', '')}0000"[:6]
             self._reminder_time: time = time(
-                hour=int(cleaned[:2]), 
+                hour=int(cleaned[:2]),
                 minute=int(cleaned[2:4]),
                 second=int(cleaned[4:]),
             )

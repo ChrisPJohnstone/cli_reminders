@@ -66,6 +66,7 @@ reminder_time_error_tests: list[tuple[str, str]] = [
     ("test", "Reminder time test is not supported"),
 ]
 
+
 @patch.object(Config, "__init__", new=MagicMock(return_value=None))
 @pytest.mark.parametrize(["value", "expected"], reminder_time_error_tests)
 def test_reminder_time_error(value: str, expected: str) -> None:
