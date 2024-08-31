@@ -1,20 +1,22 @@
 from argparse import ArgumentParser, Namespace
 
-
-VALID_INCREMENTS: list[str] = [
-    "something",
-    "orother",
-]
+from .helpers import Config
 
 
 def main() -> None:
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
-        dest="when",
-        metavar="when",
+        dest="--date",
+        metavar="date",
         type=str,
-        choices=VALID_INCREMENTS,
-        help="When reminder should be sent",
+        required=False,
+        help="Date reminder should be sent",
+    )
+    parser.add_argument(
+        dest="time",
+        metavar="time",
+        type=str,
+        help="Time reminder should be sent",
     )
     parser.add_argument(
         dest="message",
@@ -24,7 +26,8 @@ def main() -> None:
         help="Message reminder should display",
     )
     args: Namespace = parser.parse_args()
-    print(args)
+    config: Config = Config(**vars(args))
+    print(config)
 
 
 if __name__ == "__main__":
