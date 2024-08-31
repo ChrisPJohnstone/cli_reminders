@@ -61,6 +61,18 @@ def test_reminder_time(value: str, expected: str) -> None:
     assert config.reminder_time == expected
 
 
+reminder_time_error_tests: list[tuple[str, str]] = [
+    ("test", "Reminder time test is not supported"),
+]
+
+@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@pytest.mark.parametrize(["value", "expected"], reminder_time_error_tests)
+def test_reminder_time_error(value: str, expected: str) -> None:
+    config: Config = Config("", "", [""])
+    with pytest.raises(NotImplementedError, match=expected):
+        config.reminder_time = value
+
+
 message_tests: list[tuple[list[str], str]] = [
     (["test"], "test"),
     (["This", "is", "a", "message"], "This is a message"),

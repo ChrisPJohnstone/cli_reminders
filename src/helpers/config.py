@@ -30,7 +30,6 @@ class Config:
             self._reminder_date: date = parsed.date()
         else:
             raise NotImplementedError(f"Reminder date {value} is not supported")
-            # TODO: Add tests for error
 
     @property
     def reminder_time(self) -> time:
@@ -47,7 +46,6 @@ class Config:
             )
         else:
             raise NotImplementedError(f"Reminder time {value} is not supported")
-            # TODO: Add tests for error
 
     @property
     def message(self) -> str:
