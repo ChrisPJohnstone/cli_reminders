@@ -14,9 +14,11 @@ def main() -> None:
         help="Date reminder should be sent",
     )
     parser.add_argument(
+        "--time",
         dest="reminder_time",
         metavar="time",
         type=str,
+        required=False,
         help="Time reminder should be sent",
     )
     parser.add_argument(

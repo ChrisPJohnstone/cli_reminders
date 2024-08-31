@@ -6,7 +6,7 @@ class Config:
     def __init__(
         self,
         reminder_date: str | None,
-        reminder_time: str,
+        reminder_time: str | None,
         message: list[str],
     ) -> None:
         self.reminder_date = reminder_date
@@ -14,7 +14,7 @@ class Config:
         self.message = message
 
     @property
-    def DEFAULT_DATE(self) -> date:
+    def DEFAULT_REMINDER_DATE(self) -> date:
         return date.today()
 
     @property
@@ -24,7 +24,7 @@ class Config:
     @reminder_date.setter
     def reminder_date(self, value: str | None) -> None:
         if not value:
-            self._reminder_date: date = self.DEFAULT_DATE
+            self._reminder_date: date = self.DEFAULT_REMINDER_DATE
         elif fullmatch(r"\d{4}-\d{2}-\d{2}", value):
             parsed: datetime = datetime.strptime(value, "%Y-%m-%d")
             self._reminder_date: date = parsed.date()
@@ -32,12 +32,18 @@ class Config:
             raise NotImplementedError(f"Reminder date {value} is not supported")
 
     @property
+    def DEFAULT_REMINDER_TIME(self) -> time:
+        return time(9)
+
+    @property
     def reminder_time(self) -> time:
         return self._reminder_time
 
     @reminder_time.setter
-    def reminder_time(self, value: str) -> None:
-        if fullmatch(r"\d{2}(:?\d{2}){0,2}", value):
+    def reminder_time(self, value: str | None) -> None:
+        if not value:
+            self._reminder_time: time = self.DEFAULT_REMINDER_TIME
+        elif fullmatch(r"\d{2}(:?\d{2}){0,2}", value):
             cleaned: str = f"{value.replace(':', '')}0000"[:6]
             self._reminder_time: time = time(
                 hour=int(cleaned[:2]), 
