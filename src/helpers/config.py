@@ -36,14 +36,22 @@ class Config:
 
     @property
     def reminder_time(self) -> str:
-        return self._time
+        return self._reminder_time
         # TODO: Change time property to time type
 
     @reminder_time.setter
     def reminder_time(self, value: str) -> None:
         if fullmatch(r"\d{2}(:\d{2}){0,2}", value):
-            self._time: str = f"{value}:00:00"[:8]
+            self._reminder_time: str = f"{value}:00:00"[:8]
             return
         # TODO: Find a cleaner solution than return
         raise NotImplementedError(f"Reminder time {value} is not supported")
         # TODO: Add tests for error
+
+    @property
+    def message(self) -> str:
+        return self._message
+
+    @message.setter
+    def message(self, value: list[str]) -> None:
+        self._message: str = " ".join(value)

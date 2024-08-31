@@ -40,3 +40,17 @@ def test_reminder_time(value: str, expected: str) -> None:
     config: Config = Config("", "", [""])
     config.reminder_time = value
     assert config.reminder_time == expected
+
+
+message_tests: list[tuple[list[str], str]] = [
+    (["test"], "test"),
+    (["This", "is", "a", "message"], "This is a message"),
+]
+
+
+@patch.object(Config, "__init__", new=MagicMock(return_value=None))
+@pytest.mark.parametrize(["value", "expected"], message_tests)
+def test_message(value: list[str], expected: str) -> None:
+    config: Config = Config("", "", [""])
+    config.message = value
+    assert config.message == expected
