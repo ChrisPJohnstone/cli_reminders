@@ -6,7 +6,8 @@ from .helpers import Config
 def main() -> None:
     parser: ArgumentParser = ArgumentParser()
     parser.add_argument(
-        dest="--date",
+        "--date",
+        dest="date",
         metavar="date",
         type=str,
         required=False,
