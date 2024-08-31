@@ -34,7 +34,7 @@ def test_reminder_date_error(value: str, expected: str) -> None:
         config.reminder_date = value
 
 
-reminder_time_tests: list[tuple[str | None, str]] = [
+reminder_time_tests: list[tuple[str | None, time]] = [
     (None, time(9)),
     ("09", time(9)),
     ("15", time(15)),
