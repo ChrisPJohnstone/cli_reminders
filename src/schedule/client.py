@@ -1,17 +1,13 @@
+from argparse import Namespace
 from datetime import date, datetime, time
 from re import fullmatch
 
 
 class Client:
-    def __init__(
-        self,
-        reminder_date: str | None,
-        reminder_time: str | None,
-        message: list[str],
-    ) -> None:
-        self.reminder_date = reminder_date
-        self.reminder_time = reminder_time
-        self.message = message
+    def __init__(self, args: Namespace) -> None:
+        self.reminder_date = args.reminder_date
+        self.reminder_time = args.reminder_time
+        self.message = args.message
 
     @property
     def DEFAULT_REMINDER_DATE(self) -> date:

@@ -1,3 +1,4 @@
+from argparse import Namespace
 from datetime import date, time
 from unittest.mock import _Call, call, MagicMock, patch, PropertyMock
 import pytest
@@ -6,28 +7,31 @@ from schedule import Client
 
 
 init_args: list[str] = [
-    "reminder_date",
-    "reminder_time",
-    "message",
+    "args",
     "expected_reminder_date_calls",
     "expected_reminder_time_calls",
     "expected_message_calls",
 ]
 init_tests: list[
     tuple[
-        str | None,
-        str | None,
-        list[str],
+        Namespace,
         list[_Call],
         list[_Call],
         list[_Call],
     ]
 ] = [
-    (None, None, [""], [call(None)], [call(None)], [call([""])]),
     (
-        "apple",
-        "banana",
-        ["cherry", "strawberry"],
+        Namespace(reminder_date=None, reminder_time=None, message=[""]),
+        [call(None)],
+        [call(None)],
+        [call([""])],
+    ),
+    (
+        Namespace(
+            reminder_date="apple",
+            reminder_time="banana",
+            message=["cherry", "strawberry"],
+        ),
         [call("apple")],
         [call("banana")],
         [call(["cherry", "strawberry"])],
@@ -43,14 +47,12 @@ def test_init(
     mock_reminder_date: PropertyMock,
     mock_reminder_time: PropertyMock,
     mock_message: PropertyMock,
-    reminder_date: str | None,
-    reminder_time: str | None,
-    message: list[str],
+    args: Namespace,
     expected_reminder_date_calls: list[_Call],
     expected_reminder_time_calls: list[_Call],
     expected_message_calls: list[_Call],
 ) -> None:
-    Client(reminder_date, reminder_time, message)
+    Client(args)
     mock_reminder_date.assert_has_calls(expected_reminder_date_calls)
     mock_reminder_time.assert_has_calls(expected_reminder_time_calls)
     mock_message.assert_has_calls(expected_message_calls)
