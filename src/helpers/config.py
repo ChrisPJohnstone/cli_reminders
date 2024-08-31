@@ -1,5 +1,5 @@
-from re import fullmatch
 from datetime import date, datetime, time
+from re import fullmatch
 
 
 class Config:
@@ -25,28 +25,29 @@ class Config:
     def reminder_date(self, value: str | None) -> None:
         if not value:
             self._reminder_date: date = self.DEFAULT_DATE
-            return
         elif fullmatch(r"\d{4}-\d{2}-\d{2}", value):
             parsed: datetime = datetime.strptime(value, "%Y-%m-%d")
             self._reminder_date: date = parsed.date()
-            return
-        # TODO: Find a cleaner solution than return
-        raise NotImplementedError(f"Reminder date {value} is not supported")
-        # TODO: Add tests for error
+        else:
+            raise NotImplementedError(f"Reminder date {value} is not supported")
+            # TODO: Add tests for error
 
     @property
-    def reminder_time(self) -> str:
+    def reminder_time(self) -> time:
         return self._reminder_time
-        # TODO: Change time property to time type
 
     @reminder_time.setter
     def reminder_time(self, value: str) -> None:
-        if fullmatch(r"\d{2}(:\d{2}){0,2}", value):
-            self._reminder_time: str = f"{value}:00:00"[:8]
-            return
-        # TODO: Find a cleaner solution than return
-        raise NotImplementedError(f"Reminder time {value} is not supported")
-        # TODO: Add tests for error
+        if fullmatch(r"\d{2}(:?\d{2}){0,2}", value):
+            cleaned: str = f"{value.replace(':', '')}0000"[:6]
+            self._reminder_time: time = time(
+                hour=int(cleaned[:2]), 
+                minute=int(cleaned[2:4]),
+                second=int(cleaned[4:]),
+            )
+        else:
+            raise NotImplementedError(f"Reminder time {value} is not supported")
+            # TODO: Add tests for error
 
     @property
     def message(self) -> str:
