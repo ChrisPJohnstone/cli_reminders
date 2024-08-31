@@ -2,11 +2,13 @@ from argparse import _SubParsersAction, ArgumentParser
 
 from .command import Command
 
+COMMAND: str = "send"
+
 
 class Send(Command):
     @staticmethod
     def add_args(subparsers: _SubParsersAction) -> None:
-        parser: ArgumentParser = subparsers.add_parser("send")
+        parser: ArgumentParser = subparsers.add_parser(COMMAND)
         parser.add_argument(
             "--title",
             dest="title",

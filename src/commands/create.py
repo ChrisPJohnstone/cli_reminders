@@ -2,11 +2,13 @@ from argparse import _SubParsersAction, ArgumentParser
 
 from .command import Command
 
+COMMAND: str = "create"
+
 
 class Create(Command):
     @staticmethod
     def add_args(subparsers: _SubParsersAction) -> None:
-        parser: ArgumentParser = subparsers.add_parser("create")
+        parser: ArgumentParser = subparsers.add_parser(COMMAND)
         parser.add_argument(
             "-d",
             "--date",
