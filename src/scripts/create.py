@@ -1,7 +1,6 @@
 from argparse import ArgumentParser, Namespace
 
 from src.helpers import Config
-from src.notification import Client as NotificationClient
 
 
 def create() -> None:
