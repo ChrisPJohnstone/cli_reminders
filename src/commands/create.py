@@ -1,4 +1,4 @@
-from argparse import _SubParsersAction, ArgumentParser
+from argparse import _SubParsersAction, ArgumentParser, Namespace
 
 from .command import Command
 
@@ -6,6 +6,11 @@ COMMAND: str = "create"
 
 
 class Create(Command):
+    def __init__(self, args: Namespace) -> None:
+        print(args)
+        raise NotImplementedError("Create not implemeted")
+        # TODO: Implement
+
     @staticmethod
     def add_args(subparsers: _SubParsersAction) -> None:
         parser: ArgumentParser = subparsers.add_parser(COMMAND)

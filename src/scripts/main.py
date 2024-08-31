@@ -22,7 +22,8 @@ def main() -> None:
     for command in COMMANDS.values():
         command.add_args(subparsers)
     args: Namespace = parser.parse_args()
-    print(args)
+    command: Type[Command] = COMMANDS[args.command](args)
+    # TODO: Consider moving logic out of init
 
 
 if __name__ == "__main__":

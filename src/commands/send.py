@@ -1,11 +1,19 @@
-from argparse import _SubParsersAction, ArgumentParser
+from argparse import _SubParsersAction, ArgumentParser, Namespace
 
 from .command import Command
+from src.notification import Client as NotificationClient
 
 COMMAND: str = "send"
 
 
 class Send(Command):
+    def __init__(self, args: Namespace) -> None:
+        notification_client: NotificationClient = NotificationClient(
+            title=args.title,
+            application_name=args.application_name,
+        )
+        notification_client.send(args.message)
+
     @staticmethod
     def add_args(subparsers: _SubParsersAction) -> None:
         parser: ArgumentParser = subparsers.add_parser(COMMAND)

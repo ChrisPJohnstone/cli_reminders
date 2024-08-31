@@ -34,7 +34,7 @@ class Client:
     def application_name(self, value: str | None) -> None:
         self._application_name: str = value or self.DEFAULT_TITLE
 
-    def send_notification(self, message: str) -> None:
+    def send(self, message: str) -> None:
         Notify(
             default_notification_title=self.title,
             default_notification_message=message,
