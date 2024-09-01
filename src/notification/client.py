@@ -32,7 +32,7 @@ class Client:
 
     @application_name.setter
     def application_name(self, value: str | None) -> None:
-        self._application_name: str = value or self.DEFAULT_TITLE
+        self._application_name: str = value or self.DEFAULT_APPLICATION_NAME
 
     def send(self, message: str) -> None:
         Notify(
@@ -40,3 +40,4 @@ class Client:
             default_notification_message=message,
             default_notification_application_name=self.application_name,
         ).send()
+        # TODO: Build test
