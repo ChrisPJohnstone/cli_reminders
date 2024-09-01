@@ -17,7 +17,6 @@ dependencies = [
 
   [project.scripts]
   reminder = "src.scripts:main"
-  # TODO: Fix script address
 
 [tool.setuptools.packages.find]
 include = ["*"]
