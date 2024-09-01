@@ -40,4 +40,3 @@ class Client:
             default_notification_message=message,
             default_notification_application_name=self.application_name,
         ).send()
-        # TODO: Build test
