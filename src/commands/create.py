@@ -1,13 +1,18 @@
 from argparse import _SubParsersAction, ArgumentParser, Namespace
 
 from .command import Command
+from src.schedule import Client as ScheduleClient
 
 COMMAND: str = "create"
 
 
 class Create(Command):
     def __init__(self, args: Namespace) -> None:
-        print(args)
+        schedule_client: ScheduleClient = ScheduleClient(
+            reminder_date=args.reminder_date,
+            reminder_time=args.reminder_time,
+            message=args.message,
+        )
         raise NotImplementedError("Create not implemeted")
         # TODO: Implement
 
