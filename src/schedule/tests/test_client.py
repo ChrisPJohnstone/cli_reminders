@@ -138,3 +138,22 @@ def test_message(value: list[str], expected: str) -> None:
     client: Client = Client("", "", [""])
     client.message = value
     assert client.message == expected
+
+
+command_tests: list[tuple[str, str]] = [
+    ("test", 'reminder send --message "test"'),
+    ("This is a message", 'reminder send --message "This is a message"'),
+]
+
+
+@patch.object(Client, "message", new_callable=PropertyMock)
+@patch.object(Client, "__init__", new=MagicMock(return_value=None))
+@pytest.mark.parametrize(["message", "expected"], command_tests)
+def test_command(
+    mock_message: PropertyMock,
+    message: list[str],
+    expected: str,
+) -> None:
+    mock_message.return_value = message
+    client: Client = Client("", "", [""])
+    assert client.command == expected

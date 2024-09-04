@@ -1,3 +1,4 @@
+from crontab import CronItem, CronTab
 from datetime import date, datetime, time
 from re import fullmatch
 
@@ -60,3 +61,14 @@ class Client:
     @message.setter
     def message(self, value: list[str]) -> None:
         self._message: str = " ".join(value)
+
+    @property
+    def command(self) -> str:
+        return f'reminder send --message "{self.message}"'
+
+    def write(self) -> None:
+        with CronTab(user=True) as crontab:
+            job: CronItem = crontab.new(command=self.command)
+            job.minute.every(1)
+            # TODO: Fix scheduling
+            # TODO: Add test for this function

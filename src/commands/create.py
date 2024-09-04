@@ -13,8 +13,7 @@ class Create(Command):
             reminder_time=args.reminder_time,
             message=args.message,
         )
-        raise NotImplementedError("Create not implemeted")
-        # TODO: Implement
+        schedule_client.write()
 
     @staticmethod
     def add_args(subparsers: _SubParsersAction) -> None:
